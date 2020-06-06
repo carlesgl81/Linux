@@ -1,0 +1,156 @@
+﻿Linux Commands
+
+ls -> list files and folders
+	ls -alh -> shows all properties
+touch -> creates a file
+cat -> shows text files content in terminal
+mkdir -> creates a folder
+rm -> remove a file
+rmdir -> remove a folder
+rm -r foldername/ <- if the folder is not empty
+man -> help
+	man mv
+	man mkdir
+	etc...
+cd -> cd FolderName/
+      cd ../.. para ir al root
+cp -> copy file to somewhere cp foldername/test.txt testcopy.txt
+
+Text Editors
+
+Easy: Nano
+Best to learn: vi   (man vi)
+for Programming: emacs
+
+mv test.txt renametest.txt -> renames a file
+
+Pipes
+	Standard In -> 0
+	Standard Out -> 1
+	Standard Error -> 2
+
+0,1,2 are file redirectors.
+
+xxx >sometext.txt -> Add a result to a file. Overwrite if something written.
+xxx >>sometext.txt -> Append the result to the file content. Do not overwrite.
+
+mail -s "this is the subject" carles < message.txt
+
+ps -> shows processes
+ps aux | less
+	
+Ctrl + r -> reverse commands: para buscar antiguos comandos usados en la
+	sesión y buscar por nombre si hace falta
+
+ln -s file3 file3LINK -> acceso directo / link a ese archivo.
+
+head -> shows the first 10 lines of the file
+tale -> shows the last 10 lines of the file
+
+shutdown -h now -> apaga el sistema
+init 0 -> apaga también
+poweroff
+
+sudo to start root
+
+in CentOS/RHat/Suse/Fedora/MacOS use yum to install packages
+in Ubuntu/Devian use apt-get to install packages
+
+su to access to root, then yum update -y kernel. Then, sudo yum update.
+sudo yum upgrade
+
+sudo yum install firefox
+sudo yum uninstall firefox
+yum-cache search WHATEVER -> to find any software in your computer
+
+To install GUI in CentOS
+
+- dnf group list
+- dnf groupinstall workstation
+- To start with GNOME directly always: systemctl set-default graphical.target
+- systemctl isolate graphical.target -> to start graphical mode from terminal
+
+
+Top -> shows processids (PIDs)
+htop -> https://www.cyberciti.biz/faq/how-to-install-htop-on-centos-linux-8/ 
+
+Init 1 -> is the first process.
+ps aux | grep init -> looks for init processes.
+
+Effective user ID -> user id process.
+
+Signals -> how processes communicate between them.
+
+Kill (9 SIGKILL)-> closes a process "Kill 4833" Only if a process is not responding.
+Kill (15 - SIGTERM) -> to terminate a process in a nicer way.	
+cups -> allows you to print on network printers.
+sudo killall cups -> this would kill all processes of cups
+sudo pkill -u carles -> would kill all processes for my user
+man pkill
+man 7 signal
+
+Monitoring
+process states
+	1 RUNABLE (will be scheduled to use the CPU)
+	2 SLEEPING (waiting to use the kernel/cpu)
+	3 ZOMBIE (finished to use the cpu, waiting to return the result, then will be killed)
+	4 STOPPED (paused, stopped. Waiting to continue what it was doing)
+
+Niceness -> priority between processes. Higher number, nicer is a process to another processes 
+	in relation to other processes. Higher the number, lower the priority.
+nice -n 15 /backup/not/important/at/all/task
+sudo renice -5 2744 -> to renice a process.
+With htop we can change the priority with F7 and F8.
+
+priority goes from -20 to 20
+
+proc -> file system (kernel posts the currently running processes)
+ls -alh /proc -> show the processes in proc.
+ls -alh /proc/PIDNumber -> shows the
+
+sudo -i -> sudo interactive bash session.
+
+strace ->find out what processes are doing.
+
+Linux File System
+	etc/ configuration for data and applications. You start here with troubleshooting.
+	sbin/ secure binaries
+	bin/ binaries
+	tmp/ temporary files
+	lib/ (dll in windows)
+	lib64/
+	media/ auto mount devices (ubuntu)
+	mnt/mount
+	opt/ optional software
+	proc/ configuration files of processes running.
+	
+
+man hier - find help for these folders and structure.
+
+Linux Layout
+	sda -> disk 
+	sda1 -> partition
+	
+ifconfig -> shows physical and virtual networks
+
+/usr/share -> stuff that may be common to many systems. Like to create images for desktops
+/var/log -> system logs
+
+netstat -tupln
+sudo netstat -tupln
+
+scripting
+	&& - do_something && if it ran succesfully, do_something_else.
+	If program 1 works, program 2 will run.
+	If program 1 does not work (error), program 2 won´t run.
+
+cut -> man cut
+sort -> man sort
+wc -> man wc
+
+grep -> searching tool 
+cat file.txt | grep user
+	user:love
+grep someone file.txt
+uniq
+
